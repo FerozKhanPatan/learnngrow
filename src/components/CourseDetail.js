@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FaStar, FaClock, FaPlay, FaShoppingCart, FaArrowLeft, FaBook, FaCertificate } from 'react-icons/fa';
 import '../styles/global.css';
@@ -9,7 +9,7 @@ const CourseDetail = () => {
   const [loading, setLoading] = useState(true);
 
   // All courses data (same as in Courses.js)
-  const allCourses = [
+  const allCourses = useMemo(() => [
     {
       id: 1,
       title: "Android (Kotlin + Jetpack)",
@@ -470,7 +470,7 @@ const CourseDetail = () => {
         "Parental support for younger students"
       ]
     }
-  ];
+  ], []);
 
   useEffect(() => {
     // Find course by ID with safety check
