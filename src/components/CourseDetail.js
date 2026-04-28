@@ -484,7 +484,7 @@ const CourseDetail = () => {
 
     setCourse(foundCourse);
     setLoading(false);
-  }, [id]);
+  }, [id, allCourses]);
 
   
   if (loading) {
