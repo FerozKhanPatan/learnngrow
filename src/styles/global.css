@@ -3223,8 +3223,13 @@ button {
   background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
   background-clip: text;
   -webkit-background-clip: text;
-  color: transparent;
-  animation: gradientXY 15s ease infinite;
+  -webkit-text-fill-color: transparent;
+}
+
+.dashboard-demo-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+  font-size: 0.9em;
 }
 
 .dashboard-subtitle {

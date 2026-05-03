@@ -25,28 +25,28 @@ const Dashboard = () => {
     {
       icon: <FaBook />,
       label: 'Courses Enrolled',
-      value: '5',
+      value: '0',
       color: 'from-blue-500 to-cyan-600',
       delay: 0
     },
     {
       icon: <FaCheckCircle />,
       label: 'Completed',
-      value: '3',
+      value: '0',
       color: 'from-green-500 to-emerald-600',
       delay: 100
     },
     {
       icon: <FaAward />,
       label: 'Certificates',
-      value: '2',
+      value: '0',
       color: 'from-purple-500 to-pink-600',
       delay: 200
     },
     {
       icon: <FaProjectDiagram />,
       label: 'Projects',
-      value: '4',
+      value: '0',
       color: 'from-orange-500 to-red-600',
       delay: 300
     }
@@ -54,23 +54,23 @@ const Dashboard = () => {
 
   const recentActivity = [
     {
-      title: 'React Development Course',
-      description: 'Completed Module 3',
-      time: '2 hours ago',
+      title: 'Account Created',
+      description: 'Welcome to Learn N Byte',
+      time: 'Just now',
       icon: <FaUserGraduate />,
       color: 'text-blue-500'
     },
     {
-      title: 'JavaScript Fundamentals',
-      description: 'Quiz completed',
-      time: '1 day ago',
+      title: 'Dashboard Setup',
+      description: 'Personal dashboard configured',
+      time: 'Few minutes ago',
       icon: <FaChartLine />,
       color: 'text-green-500'
     },
     {
-      title: 'Web Development',
-      description: 'Started new module',
-      time: '3 days ago',
+      title: 'Getting Started',
+      description: 'Ready to begin your learning journey',
+      time: 'Today',
       icon: <FaBook />,
       color: 'text-purple-500'
     }
@@ -82,6 +82,7 @@ const Dashboard = () => {
       <div className={`dashboard-header ${isVisible ? 'slide-in-down' : ''}`}>
         <h1 className="dashboard-title">
           <span className="dashboard-title-gradient">Welcome to Your Dashboard</span>
+          <span className="dashboard-demo-text"> (demo)</span>
         </h1>
         <p className="dashboard-subtitle">Track your learning progress and achievements</p>
       </div>
@@ -94,12 +95,7 @@ const Dashboard = () => {
             className={`dashboard-stat-card ${statsVisible ? 'slide-in-up' : ''}`}
             style={{ animationDelay: `${stat.delay}ms` }}
           >
-            <div className={`stat-icon-container bg-gradient-to-r ${stat.color}`}>
-              <div className="stat-icon">
-                {stat.icon}
-              </div>
-            </div>
-            <h3 className="dashboard-stat-label">{stat.label}</h3>
+                        <h3 className="dashboard-stat-label">{stat.label}</h3>
             <p className="dashboard-stat-value">{stat.value}</p>
             <div className="stat-progress-bar">
               <div 
