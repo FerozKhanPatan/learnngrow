@@ -1,9 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaGraduationCap, FaMobileAlt, FaLaptopCode, FaChalkboardTeacher, FaUsers, FaLightbulb, FaBullseye, FaEye, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from 'react-icons/fa';
 import aboutLogo from '../assets/images/about-logo.png';
+import guestLecture from '../assets/images/guest-lecture.jpeg';
+import seminar from '../assets/images/Seminar.jpeg';
+import collegeWorkshop from '../assets/images/college-workshop.jpeg';
+import mockInterview from '../assets/images/mock-interview.jpeg';
+import aiMLWorkshop from '../assets/images/AI ML Workshop.jpeg';
+import classroomTraining from '../assets/images/ClassroomTraining.jpeg';
 import '../styles/global.css';
 
-const About = () => {
+function About() {
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const galleryImages = [
+    { src: guestLecture, alt: "Guest Lectures", title: "Guest Lectures" },
+    { src: seminar, alt: "Seminars", title: "Seminars" },
+    { src: collegeWorkshop, alt: "College Workshops", title: "College Workshops" },
+    { src: mockInterview, alt: "Mock Interviews", title: "Mock Interviews" },
+    { src: aiMLWorkshop, alt: "AI ML Workshop", title: "AI ML Workshop" },
+    { src: classroomTraining, alt: "Classroom Training", title: "Classroom Training" }
+  ];
+
+  const handleInputChange = (e) => {
+    const form = e.target.form;
+    const isValid = form.checkValidity();
+    setIsFormValid(isValid);
+  };
+
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
+  };
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <div className="about-page">
       {/* Hero Section */}
@@ -14,21 +46,7 @@ const About = () => {
           </div>
           <h1 className="about-hero-title">About Learn N Byte</h1>
           <p className="about-hero-subtitle">Empowering Education Through Technology</p>
-          <div className="about-hero-stats">
-            <div className="stat-item">
-              <div className="stat-number">10,000+</div>
-              <div className="stat-label">Students Trained</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">13+</div>
-              <div className="stat-label">Expert Courses</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">50+</div>
-              <div className="stat-label">Expert Instructors</div>
-            </div>
-          </div>
-        </div>
+                  </div>
       </section>
 
       {/* What We Do Section */}
@@ -130,47 +148,44 @@ const About = () => {
         </div>
       </section>
 
-      {/* Gallery Section */}
+      {/* Events Section */}
       <section className="about-section gallery-section">
         <div className="container">
-          <h2 className="section-title">Gallery</h2>
-          <div className="gallery-grid">
-            <div className="gallery-item">
-              <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop" alt="Classroom Training" />
-              <div className="gallery-overlay">
-                <span>Classroom Training</span>
+          <h2 className="section-title">Our Events Gallery</h2>
+          <div className="carousel-container">
+            <button className="carousel-btn carousel-btn-prev" onClick={handlePrevImage}>
+              ‹
+            </button>
+            <div className="carousel-viewport">
+              <div 
+                className="carousel-track" 
+                style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+              >
+                {galleryImages.map((image, index) => (
+                  <div 
+                    key={index} 
+                    className={`carousel-item ${index === currentImageIndex ? 'active' : ''}`}
+                  >
+                    <img src={image.src} alt={image.alt} />
+                    <div className="gallery-overlay">
+                      <span>{image.title}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="gallery-item">
-              <img src="https://images.unsplash.com/photo-1559028006-848a6538dfc9?w=400&h=300&fit=crop" alt="Workshop Session" />
-              <div className="gallery-overlay">
-                <span>Workshop Session</span>
-              </div>
-            </div>
-            <div className="gallery-item">
-              <img src="https://images.unsplash.com/photo-1512941937409-a4c65e70187e?w=400&h=300&fit=crop" alt="Mobile Development" />
-              <div className="gallery-overlay">
-                <span>Mobile Development</span>
-              </div>
-            </div>
-            <div className="gallery-item">
-              <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop" alt="Coding Bootcamp" />
-              <div className="gallery-overlay">
-                <span>Coding Bootcamp</span>
-              </div>
-            </div>
-            <div className="gallery-item">
-              <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop" alt="AI Workshop" />
-              <div className="gallery-overlay">
-                <span>AI Workshop</span>
-              </div>
-            </div>
-            <div className="gallery-item">
-              <img src="https://images.unsplash.com/photo-1579403124614-197f69d8187b?w=400&h=300&fit=crop" alt="Student Projects" />
-              <div className="gallery-overlay">
-                <span>Student Projects</span>
-              </div>
-            </div>
+            <button className="carousel-btn carousel-btn-next" onClick={handleNextImage}>
+              ›
+            </button>
+          </div>
+          <div className="carousel-dots">
+            {galleryImages.map((_, index) => (
+              <button
+                key={index}
+                className={`carousel-dot ${index === currentImageIndex ? 'active' : ''}`}
+                onClick={() => setCurrentImageIndex(index)}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -210,7 +225,7 @@ const About = () => {
                 <div className="contact-details">
                   <h4>Address</h4>
                   <p>
-                    Learn N Byte Training Center<br />
+                    Learn N Byte<br />
                     Bangalore, Karnataka 560001<br />
                     India
                   </p>
@@ -224,9 +239,7 @@ const About = () => {
                 <div className="contact-details">
                   <h4>Working Hours</h4>
                   <p>
-                    Monday - Friday: 9:00 AM - 6:00 PM<br />
-                    Saturday: 9:00 AM - 2:00 PM<br />
-                    Sunday: Closed
+                    Sunday: 9:00 AM - 6:00 PM
                   </p>
                 </div>
               </div>
@@ -236,18 +249,74 @@ const About = () => {
               <h3 className="contact-subtitle">Send us a Message</h3>
               <form className="form">
                 <div className="form-group">
-                  <input type="text" placeholder="Your Name" required />
+                  <input 
+                    type="text" 
+                    name="name"
+                    onChange={handleInputChange}
+                    placeholder="Your Name *" 
+                    title="Please fill all *marked fields" 
+                    required 
+                  />
                 </div>
                 <div className="form-group">
-                  <input type="email" placeholder="Your Email" required />
+                  <input 
+                    type="email" 
+                    name="email"
+                    onChange={handleInputChange}
+                    placeholder="Your Email *" 
+                    title="Please fill all *marked fields" 
+                    required 
+                  />
                 </div>
                 <div className="form-group">
-                  <input type="tel" placeholder="Your Phone" />
+                  <div className="phone-input-group">
+                    <select 
+                      className="country-code-select" 
+                      name="countryCode"
+                      onChange={handleInputChange}
+                      title="Please fill all *marked fields" 
+                      required
+                    >
+                      <option value="">Country *</option>
+                      <option value="+91">+91 India</option>
+                      <option value="+1">+1 USA/Canada</option>
+                      <option value="+44">+44 UK</option>
+                      <option value="+61">+61 Australia</option>
+                      <option value="+971">+971 UAE</option>
+                      <option value="+966">+966 Saudi Arabia</option>
+                      <option value="+65">+65 Singapore</option>
+                      <option value="+60">+60 Malaysia</option>
+                    </select>
+                    <input 
+                      type="tel" 
+                      name="mobileNumber"
+                      onChange={handleInputChange}
+                      placeholder="Mobile Number *" 
+                      title="Please fill all *marked fields" 
+                      className="mobile-number-input" 
+                      maxLength="10" 
+                      required 
+                    />
+                  </div>
                 </div>
                 <div className="form-group">
-                  <textarea placeholder="Your Message" rows="5" required></textarea>
+                  <textarea 
+                    name="message"
+                    onChange={handleInputChange}
+                    placeholder="Your Message *" 
+                    rows="5" 
+                    title="Please fill all *marked fields" 
+                    required
+                  ></textarea>
                 </div>
-                <button type="submit" className="submit-btn">Send Message</button>
+                <button 
+                  type="submit" 
+                  className="submit-btn" 
+                  disabled={!isFormValid}
+                  style={{ opacity: isFormValid ? 1 : 0.6, cursor: isFormValid ? 'pointer' : 'not-allowed' }}
+                >
+                  Send Message
+                </button>
               </form>
             </div>
           </div>

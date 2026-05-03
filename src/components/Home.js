@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaArrowRight, FaStar, FaUsers, FaCheck, FaQuoteLeft, FaGraduationCap, FaRocket, FaBookOpen, FaPlay } from 'react-icons/fa';
+import { FaArrowRight, FaStar, FaUsers, FaCheck, FaQuoteLeft, FaGraduationCap, FaBookOpen, FaPlay } from 'react-icons/fa';
 import '../styles/global.css';
 
 const Home = () => {
@@ -145,31 +145,9 @@ const Home = () => {
                   <span>Explore Courses</span>
                   <FaArrowRight className="btn-hero-primary-icon" />
                 </Link>
-                <Link
-                  to="/register"
-                  className="btn-hero-secondary"
-                >
-                  <span>Start Free Trial</span>
-                  <FaRocket className="btn-hero-secondary-icon" />
-                </Link>
               </div>
 
-              {/* Stats */}
-              <div className="hero-stats">
-                <div className="hero-stat">
-                  <div className="hero-stat-number">15,000+</div>
-                  <div className="hero-stat-label">Students</div>
-                </div>
-                <div className="hero-stat">
-                  <div className="hero-stat-number">150+</div>
-                  <div className="hero-stat-label">Courses</div>
-                </div>
-                <div className="hero-stat">
-                  <div className="hero-stat-number">95%</div>
-                  <div className="hero-stat-label">Success Rate</div>
-                </div>
-              </div>
-            </div>
+                          </div>
 
             {/* Right Image */}
             <div className="hero-image">
@@ -392,18 +370,11 @@ const Home = () => {
             </p>
             <div className="cta-buttons">
               <Link
-                to="/register"
+                to="/courses"
                 className="cta-btn-primary"
               >
-                <span>Get Started Free</span>
-                <FaRocket className="cta-btn-primary-icon" />
-              </Link>
-              <Link
-                to="/courses"
-                className="cta-btn-secondary"
-              >
                 <span>Browse Courses</span>
-                <FaBookOpen className="cta-btn-secondary-icon" />
+                <FaBookOpen className="cta-btn-primary-icon" />
               </Link>
             </div>
           </div>
