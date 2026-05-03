@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { FaCode, FaClock, FaStar, FaFilter, FaSearch, FaRocket, FaUsers, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaCode, FaStar, FaFilter, FaSearch, FaRocket, FaUsers, FaGithub } from 'react-icons/fa';
 import '../styles/global.css';
 
 const LiveProjects = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('all');
-  const [selectedDuration, setSelectedDuration] = useState('all');
-
+  
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -44,16 +43,16 @@ const LiveProjects = () => {
     },
     {
       id: 3,
-      title: 'Weather Dashboard',
-      description: 'Build a weather dashboard with API integration, data visualization, location-based forecasts, and beautiful weather animations.',
-      difficulty: 'Beginner',
-      duration: '2 weeks',
-      rating: 4.7,
-      students: 789,
-      image: 'https://images.unsplash.com/photo-1592210454359-0199e0e1d3b1?w=400&h=250&fit=crop',
-      technologies: ['JavaScript', 'Chart.js', 'Weather API'],
-      gradient: 'from-yellow-500 to-orange-600',
-      icon: <FaStar />
+      title: 'AI Assistant Integration',
+      description: 'Develop an AI-powered assistant with natural language processing, machine learning models, and intelligent conversation capabilities.',
+      difficulty: 'Advanced',
+      duration: '6 weeks',
+      rating: 4.8,
+      students: 1250,
+      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop',
+      technologies: ['Python', 'TensorFlow', 'NLP', 'React'],
+      gradient: 'from-purple-500 to-indigo-600',
+      icon: <FaCode />
     },
     {
       id: 4,
@@ -100,13 +99,10 @@ const LiveProjects = () => {
     const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          project.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesDifficulty = selectedDifficulty === 'all' || project.difficulty === selectedDifficulty;
-    const matchesDuration = selectedDuration === 'all' || project.duration === selectedDuration;
-    
-    return matchesSearch && matchesDifficulty && matchesDuration;
+    return matchesSearch && matchesDifficulty;
   });
 
   const difficulties = ['all', 'Beginner', 'Intermediate', 'Advanced'];
-  const durations = ['all', '1 week', '2 weeks', '4 weeks', '5 weeks', '6 weeks', '8 weeks'];
 
   return (
     <div className="projects-container">
@@ -148,21 +144,6 @@ const LiveProjects = () => {
               ))}
             </select>
           </div>
-          
-          <div className="filter-group">
-            <FaClock className="filter-icon" />
-            <select
-              value={selectedDuration}
-              onChange={(e) => setSelectedDuration(e.target.value)}
-              className="filter-select"
-            >
-              {durations.map(duration => (
-                <option key={duration} value={duration}>
-                  {duration === 'all' ? 'All Durations' : duration}
-                </option>
-              ))}
-            </select>
-          </div>
         </div>
       </div>
 
@@ -191,18 +172,9 @@ const LiveProjects = () => {
             {/* Project Content */}
             <div className="project-content">
               <div className="project-header">
-                <div className="project-icon-container">
-                  <div className={`project-icon bg-gradient-to-r ${project.gradient}`}>
-                    {project.icon}
-                  </div>
-                </div>
                 <div className="project-meta-badges">
                   <span className={`difficulty-badge difficulty-${project.difficulty.toLowerCase()}`}>
                     {project.difficulty}
-                  </span>
-                  <span className="duration-badge">
-                    <FaClock />
-                    {project.duration}
                   </span>
                 </div>
               </div>
@@ -219,26 +191,7 @@ const LiveProjects = () => {
                 ))}
               </div>
 
-              {/* Project Stats */}
-              <div className="project-stats">
-                <div className="stat-item">
-                  <FaUsers className="stat-icon" />
-                  <span className="stat-text">{project.students} students</span>
-                </div>
-              </div>
-
-              {/* Project Actions */}
-              <div className="project-actions">
-                <button className={`project-btn-primary bg-gradient-to-r ${project.gradient}`}>
-                  <FaRocket />
-                  Start Project
-                </button>
-                <button className="project-btn-secondary">
-                  <FaExternalLinkAlt />
-                  Preview
-                </button>
-              </div>
-            </div>
+                          </div>
           </div>
         ))}
       </div>
