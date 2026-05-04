@@ -82,7 +82,7 @@ const Home = () => {
       duration: "8 weeks",
       rating: 4.7,
       students: 620,
-      image: "https://images.unsplash.com/photo-1461749280684-ccc6de7ed301?w=600&h=400&fit=crop",
+      image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600&h=400",
       gradient: "from-purple-400 to-pink-600",
       instructor: "Code Master",
       price: 14999,
