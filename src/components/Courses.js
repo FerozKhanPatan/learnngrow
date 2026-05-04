@@ -8,8 +8,7 @@ const Courses = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedLevel, setSelectedLevel] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [sortBy, setSortBy] = useState('popular');
-  const [wishlist, setWishlist] = useState([]);
+    const [wishlist, setWishlist] = useState([]);
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -303,14 +302,7 @@ const Courses = () => {
 
   const categories = ['all', 'frontend', 'backend', 'data-science', 'design', 'mobile'];
   const levels = ['all', 'Beginner', 'Intermediate', 'Advanced'];
-  const sortOptions = [
-    { value: 'popular', label: 'Most Popular' },
-    { value: 'rating', label: 'Highest Rated' },
-    { value: 'price-low', label: 'Price: Low to High' },
-    { value: 'price-high', label: 'Price: High to Low' },
-    { value: 'newest', label: 'Newest First' }
-  ];
-
+  
   const filteredCourses = courses.filter(course => {
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          course.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -320,20 +312,7 @@ const Courses = () => {
     return matchesSearch && matchesLevel && matchesCategory;
   });
 
-  const sortedCourses = [...filteredCourses].sort((a, b) => {
-    switch (sortBy) {
-      case 'rating':
-        return b.rating - a.rating;
-      case 'price-low':
-        return a.price - b.price;
-      case 'price-high':
-        return b.price - a.price;
-      case 'newest':
-        return b.id - a.id;
-      default:
-        return b.students - a.students;
-    }
-  });
+  const sortedCourses = [...filteredCourses];
 
   const toggleWishlist = (courseId) => {
     setWishlist(prev => 
@@ -407,27 +386,11 @@ const Courses = () => {
               </select>
             </div>
             
-            {/* Sort Dropdown */}
-            <div className="filter-dropdown">
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="filter-select"
-              >
-                {sortOptions.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            
             {/* Clear Filters Button */}
             <button
               onClick={() => {
                 setSelectedCategory('all');
                 setSelectedLevel('all');
-                setSortBy('popular');
                 setSearchTerm('');
               }}
               className="clear-filters-btn"
