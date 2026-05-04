@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaBars, FaTimes, FaHome, FaBook, FaRocket, FaChartLine, FaSignInAlt, FaUserPlus, FaChevronDown, FaInfoCircle } from 'react-icons/fa';
+import { FaBars, FaTimes, FaHome, FaBook, FaSignInAlt, FaUserPlus, FaChevronDown, FaInfoCircle } from 'react-icons/fa';
 import logoImage from '../assets/images/LearnNByteLogo.png';
 import '../styles/global.css';
 
@@ -68,19 +68,7 @@ const Navbar = () => {
       icon: FaInfoCircle,
       description: 'About Learn N Byte'
     },
-    { 
-      name: 'Projects', 
-      path: '/projects', 
-      icon: FaRocket,
-      description: 'Hands-on projects'
-    },
-    { 
-      name: 'Dashboard', 
-      path: '/dashboard', 
-      icon: FaChartLine,
-      description: 'Your progress'
-    },
-  ];
+      ];
 
   return (
     <>
