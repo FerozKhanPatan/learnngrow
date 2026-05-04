@@ -356,47 +356,50 @@ const Courses = () => {
               />
             </div>
             
-            {/* Category Dropdown */}
-            <div className="filter-dropdown">
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="filter-select"
+            {/* Filter Controls */}
+            <div className="filter-controls-right">
+              {/* Category Dropdown */}
+              <div className="filter-dropdown">
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="filter-select"
+                >
+                  {categories.map(category => (
+                    <option key={category} value={category}>
+                      {category === 'all' ? 'All Categories' : category.charAt(0).toUpperCase() + category.slice(1)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              
+              {/* Level Dropdown */}
+              <div className="filter-dropdown">
+                <select
+                  value={selectedLevel}
+                  onChange={(e) => setSelectedLevel(e.target.value)}
+                  className="filter-select"
+                >
+                  {levels.map(level => (
+                    <option key={level} value={level}>
+                      {level === 'all' ? 'All Levels' : level}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              
+              {/* Clear Filters Button */}
+              <button
+                onClick={() => {
+                  setSelectedCategory('all');
+                  setSelectedLevel('all');
+                  setSearchTerm('');
+                }}
+                className="clear-filters-btn"
               >
-                {categories.map(category => (
-                  <option key={category} value={category}>
-                    {category === 'all' ? 'All Categories' : category.charAt(0).toUpperCase() + category.slice(1)}
-                  </option>
-                ))}
-              </select>
+                Clear Filters
+              </button>
             </div>
-            
-            {/* Level Dropdown */}
-            <div className="filter-dropdown">
-              <select
-                value={selectedLevel}
-                onChange={(e) => setSelectedLevel(e.target.value)}
-                className="filter-select"
-              >
-                {levels.map(level => (
-                  <option key={level} value={level}>
-                    {level === 'all' ? 'All Levels' : level}
-                  </option>
-                ))}
-              </select>
-            </div>
-            
-            {/* Clear Filters Button */}
-            <button
-              onClick={() => {
-                setSelectedCategory('all');
-                setSelectedLevel('all');
-                setSearchTerm('');
-              }}
-              className="clear-filters-btn"
-            >
-              Clear Filters
-            </button>
           </div>
         </div>
       </section>
@@ -482,10 +485,6 @@ const Courses = () => {
                     </div>
                     
                     <div className="course-card-actions">
-                      <button className="course-card-preview">
-                        <FaPlay />
-                        <span>Preview</span>
-                      </button>
                       <Link 
                         to={`/course/${course.id}`}
                         className="course-card-enroll"

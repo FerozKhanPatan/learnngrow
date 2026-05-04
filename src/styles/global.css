@@ -1993,9 +1993,10 @@ button {
 .filter-controls-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
-  padding: 0.5rem 0;
+  padding: 1rem 0;
 }
 
 .search-input-container {
@@ -2046,6 +2047,12 @@ button {
 
 .filter-dropdown {
   position: relative;
+}
+
+.filter-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .filter-select {
