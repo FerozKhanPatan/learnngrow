@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { FaSearch, FaStar, FaClock, FaHeart, FaShoppingCart, FaPlay } from 'react-icons/fa';
+import { FaSearch, FaStar, FaClock, FaHeart, FaShoppingCart } from 'react-icons/fa';
 import '../styles/global.css';
 
 const Courses = () => {
@@ -322,6 +321,11 @@ const Courses = () => {
     );
   };
 
+  const handleEnrollNow = (course) => {
+    // Redirect to course contact page with course information
+    window.location.href = `/course-contact?course=${encodeURIComponent(course.title)}&level=${course.level}&duration=${course.duration}`;
+  };
+
   
   const featuredCourses = sortedCourses.filter(course => course.featured);
   const regularCourses = sortedCourses.filter(course => !course.featured);
@@ -485,13 +489,13 @@ const Courses = () => {
                     </div>
                     
                     <div className="course-card-actions">
-                      <Link 
-                        to={`/course/${course.id}`}
+                      <button 
+                        onClick={() => handleEnrollNow(course)}
                         className="course-card-enroll"
                       >
                         <FaShoppingCart />
-                        <span>View Details</span>
-                      </Link>
+                        <span>Enroll Now</span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -574,13 +578,13 @@ const Courses = () => {
                     </div>
                     
                     <div className="course-card-actions">
-                      <Link 
-                        to={`/course/${course.id}`}
+                      <button 
+                        onClick={() => handleEnrollNow(course)}
                         className="course-card-enroll"
                       >
-                        <FaPlay />
-                        <span>View Details</span>
-                      </Link>
+                        <FaShoppingCart />
+                        <span>Enroll Now</span>
+                      </button>
                     </div>
                   </div>
                 </div>

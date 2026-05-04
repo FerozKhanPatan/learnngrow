@@ -16,6 +16,7 @@ import LiveProjects from './components/LiveProjects';
 import Support from './components/Support';
 import Login from './components/Login';
 import Register from './components/Register';
+import CourseContact from './components/CourseContact';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path="/courses" element={<Courses />} />
             <Route path="/course/:id" element={<CourseDetail />} />
             <Route path="/about" element={<About />} />
+            <Route path="/course-contact" element={<CourseContact />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/certificates" element={<Certificates />} />
             <Route path="/projects" element={<LiveProjects />} />
