@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaBars, FaTimes, FaHome, FaBook, FaRocket, FaChartLine, FaSignInAlt, FaUserPlus, FaChevronDown, FaInfoCircle } from 'react-icons/fa';
-import logoImage from '../assets/images/learnNByteLogo.jpeg';
+import logoImage from '../assets/images/LearnNByteLogo.png';
 import '../styles/global.css';
 
 const Navbar = () => {
@@ -93,7 +93,6 @@ const Navbar = () => {
               className="logo-link"
             >
               <div className="logo-container">
-                <div className="logo-bg-glow"></div>
                 <div className="logo-icon">
                   <img src={logoImage} alt="Learn N Byte Logo" className="logo-image" />
                 </div>
@@ -102,7 +101,6 @@ const Navbar = () => {
                 <span className="logo-title">
                   Learn N Byte
                 </span>
-                <span className="logo-subtitle">EDUCATION PLATFORM</span>
               </div>
             </Link>
 
