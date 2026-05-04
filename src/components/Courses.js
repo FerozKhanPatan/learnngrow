@@ -299,9 +299,9 @@ const Courses = () => {
   const sortedCourses = [...courses];
 
   
-  const handleEnrollNow = (course) => {
-    // Redirect to course contact page with course information
-    window.location.href = `/course-contact?course=${encodeURIComponent(course.title)}&level=${course.level}&duration=${course.duration}`;
+  const handleEnrollNow = (_course) => {
+    // Do nothing
+    return;
   };
 
   
