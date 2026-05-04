@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaSearch, FaStar, FaClock, FaHeart, FaShoppingCart } from 'react-icons/fa';
+import { FaSearch, FaStar, FaClock, FaShoppingCart } from 'react-icons/fa';
 import '../styles/global.css';
 
 const Courses = () => {
@@ -7,8 +7,7 @@ const Courses = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedLevel, setSelectedLevel] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('all');
-    const [wishlist, setWishlist] = useState([]);
-  
+      
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -313,14 +312,7 @@ const Courses = () => {
 
   const sortedCourses = [...filteredCourses];
 
-  const toggleWishlist = (courseId) => {
-    setWishlist(prev => 
-      prev.includes(courseId) 
-        ? prev.filter(id => id !== courseId)
-        : [...prev, courseId]
-    );
-  };
-
+  
   const handleEnrollNow = (course) => {
     // Redirect to course contact page with course information
     window.location.href = `/course-contact?course=${encodeURIComponent(course.title)}&level=${course.level}&duration=${course.duration}`;
@@ -436,12 +428,6 @@ const Courses = () => {
                     <div className="course-card-badge">
                       Featured
                     </div>
-                    <button
-                      onClick={() => toggleWishlist(course.id)}
-                      className="wishlist-btn"
-                    >
-                      <FaHeart className={wishlist.includes(course.id) ? 'active' : ''} />
-                    </button>
                   </div>
                   
                   <div className="course-card-content">
@@ -536,12 +522,6 @@ const Courses = () => {
                       alt={course.title}
                       className="course-card-image"
                     />
-                    <button
-                      onClick={() => toggleWishlist(course.id)}
-                      className="wishlist-btn"
-                    >
-                      <FaHeart className={wishlist.includes(course.id) ? 'active' : ''} />
-                    </button>
                   </div>
                   
                   <div className="course-card-content">
