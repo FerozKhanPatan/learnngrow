@@ -202,7 +202,7 @@ button {
 .nav-items {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 2rem;
   justify-content: center;
 }
 
@@ -1888,10 +1888,10 @@ button {
 
 .courses-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 0;
   opacity: 0;
   transform: translateY(-30px);
-  padding: 4rem 0 2rem;
+  padding: 0;
 }
 
 .courses-container {
@@ -2174,7 +2174,7 @@ button {
 }
 
 .courses-section {
-  padding: 4rem 0;
+  padding: 2rem 0;
 }
 
 .section-header {
@@ -2193,10 +2193,7 @@ button {
   margin: 0;
 }
 
-.featured-badge {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.section-subtitle {
   color: #f59e0b;
   font-weight: 600;
 }

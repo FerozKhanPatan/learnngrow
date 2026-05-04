@@ -233,13 +233,6 @@ const Home = () => {
       {/* Popular Courses */}
       <section className="courses-section">
         <div className="features-container">
-          <div className="courses-header">
-            <h2 className="courses-title">Popular Courses</h2>
-            <p className="courses-description">
-              Join thousands of students learning with our top-rated courses
-            </p>
-          </div>
-
           <div className="courses-grid">
             {courses.map((course, index) => (
               <div

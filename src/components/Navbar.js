@@ -44,23 +44,7 @@ const Navbar = () => {
       name: 'Courses', 
       path: '/courses', 
       icon: FaBook,
-      description: 'Explore courses',
-      dropdown: [
-        { name: 'Android (Kotlin + Jetpack)', path: '/courses/android' },
-        { name: 'Design Patterns', path: '/courses/design-patterns' },
-        { name: 'Data Structures & Algorithms', path: '/courses/dsa' },
-        { name: 'English Speaking & Vocabulary', path: '/courses/english-speaking' },
-        { name: 'Hindi Speaking & Vocabulary', path: '/courses/hindi-speaking' },
-        { name: 'Core & Advanced Python with AI', path: '/courses/python-ai' },
-        { name: 'Fast API (Coming Soon)', path: '/courses/fastapi' },
-        { name: 'Cloud Computing (AWS) (Coming Soon)', path: '/courses/aws' },
-        { name: 'System Designing (Coming Soon)', path: '/courses/system-design' },
-        { name: 'Generative AI (Coming Soon)', path: '/courses/generative-ai' },
-        { name: 'C Programming', path: '/courses/c-programming' },
-        { name: 'C++ Programming', path: '/courses/cpp-programming' },
-        { name: 'Core Java', path: '/courses/core-java' },
-        { name: 'Academic Tuitions (Class 6th to 10th)', path: '/courses/academic-tuitions' }
-      ]
+      description: 'Explore courses'
     },
     { 
       name: 'About Us', 
@@ -149,11 +133,6 @@ const Navbar = () => {
             </div>
 
             <div className="nav-actions">
-              <div className="online-indicator">
-                <div className="online-dot"></div>
-                <span className="online-text">Online</span>
-              </div>
-              
               <Link
                 to="/login"
                 className="btn-signin"

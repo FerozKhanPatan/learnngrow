@@ -4,10 +4,7 @@ import '../styles/global.css';
 
 const Courses = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedLevel, setSelectedLevel] = useState('all');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-      
+          
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -298,19 +295,8 @@ const Courses = () => {
     }
   ];
 
-  const categories = ['all', 'frontend', 'backend', 'data-science', 'design', 'mobile'];
-  const levels = ['all', 'Beginner', 'Intermediate', 'Advanced'];
-  
-  const filteredCourses = courses.filter(course => {
-    const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         course.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         course.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesLevel = selectedLevel === 'all' || course.level === selectedLevel;
-    const matchesCategory = selectedCategory === 'all' || course.category === selectedCategory;
-    return matchesSearch && matchesLevel && matchesCategory;
-  });
-
-  const sortedCourses = [...filteredCourses];
+    
+  const sortedCourses = [...courses];
 
   
   const handleEnrollNow = (course) => {
@@ -324,82 +310,6 @@ const Courses = () => {
 
   return (
     <div className="courses-page">
-      {/* Hero Section */}
-      <section className={`courses-header ${isVisible ? 'slide-in-down' : ''}`}>
-        <div className="courses-container">
-          <h1 className="courses-page-title">
-            <span className="courses-title-gradient">Explore Our Courses</span>
-          </h1>
-          <p className="courses-page-subtitle">
-            Discover world-class courses designed to help you master new skills and advance your career
-          </p>
-        </div>
-      </section>
-
-      {/* Combined Search and Filters Section */}
-      <section className="courses-filter-section">
-        <div className="courses-container">
-          <div className="filter-controls-row">
-            {/* Search Bar */}
-            <div className="search-input-container">
-              <FaSearch className="search-icon-inline" />
-              <input
-                type="text"
-                placeholder="Search for courses..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input-inline"
-              />
-            </div>
-            
-            {/* Filter Controls */}
-            <div className="filter-controls-right">
-              {/* Category Dropdown */}
-              <div className="filter-dropdown">
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="filter-select"
-                >
-                  {categories.map(category => (
-                    <option key={category} value={category}>
-                      {category === 'all' ? 'All Categories' : category.charAt(0).toUpperCase() + category.slice(1)}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              
-              {/* Level Dropdown */}
-              <div className="filter-dropdown">
-                <select
-                  value={selectedLevel}
-                  onChange={(e) => setSelectedLevel(e.target.value)}
-                  className="filter-select"
-                >
-                  {levels.map(level => (
-                    <option key={level} value={level}>
-                      {level === 'all' ? 'All Levels' : level}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              
-              {/* Clear Filters Button */}
-              <button
-                onClick={() => {
-                  setSelectedCategory('all');
-                  setSelectedLevel('all');
-                  setSearchTerm('');
-                }}
-                className="clear-filters-btn"
-              >
-                Clear Filters
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Featured Courses */}
       {featuredCourses.length > 0 && (
         <section className="courses-section">
@@ -494,11 +404,6 @@ const Courses = () => {
       {/* All Courses */}
       <section className="courses-section">
         <div className="courses-container">
-          <div className="section-header">
-            <h2 className="section-title">
-              All Courses ({sortedCourses.length})
-            </h2>
-          </div>
           
           {sortedCourses.length === 0 ? (
             <div className="no-results">
