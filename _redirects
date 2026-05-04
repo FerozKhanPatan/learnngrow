@@ -1,0 +1,5 @@
+# Cloudflare redirects for React SPA routing
+# Handle client-side routing for React Router
+
+# Redirect all routes that are not files/directories to index.html
+/*    /index.html   200

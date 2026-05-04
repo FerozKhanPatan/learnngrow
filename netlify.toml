@@ -1,0 +1,14 @@
+# Netlify configuration for React SPA
+# This file can also be used by Cloudflare Pages
+
+[build]
+  publish = "build"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build.environment]
+  NODE_VERSION = "18"
