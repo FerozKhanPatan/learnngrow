@@ -6,7 +6,6 @@ compatibility_date = "2024-01-01"
 [build]
 command = "npm run build"
 cwd = "."
-watch_dir = "build"
 
 [[redirects]]
 from = "/courses/*"
@@ -50,6 +49,16 @@ status = 200
 
 [[redirects]]
 from = "/certificates"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/workshops"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/reading-room"
 to = "/index.html"
 status = 200
 
