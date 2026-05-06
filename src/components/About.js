@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaGraduationCap, FaMobileAlt, FaLaptopCode, FaChalkboardTeacher, FaUsers, FaLightbulb, FaBullseye, FaEye, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from 'react-icons/fa';
+import { FaGraduationCap, FaMobileAlt, FaLaptopCode, FaChalkboardTeacher, FaUsers, FaLightbulb, FaBullseye, FaEye } from 'react-icons/fa';
 import aboutLogo from '../assets/images/about-logo.png';
 import '../styles/global.css';
 
@@ -22,7 +22,7 @@ function About() {
           </div>
           <h1 className="about-hero-title">About Learn N Byte</h1>
           <p className="about-hero-subtitle">Empowering Education Through Technology</p>
-                  </div>
+        </div>
       </section>
 
       {/* What We Do Section */}
@@ -124,62 +124,35 @@ function About() {
         </div>
       </section>
 
-      
       {/* Contact Section */}
       <section className="about-section contact-section">
         <div className="container">
           <h2 className="section-title">Get In Touch</h2>
           <div className="contact-grid">
-            <div className="contact-info">
+            {/* Contact Information */}
+            <div className="contact-form">
               <h3 className="contact-subtitle">Contact Information</h3>
-              
-              <div className="contact-item">
-                <div className="contact-icon">
-                  <FaPhone />
-                </div>
-                <div className="contact-details">
+              <div className="contact-info-display">
+                <div className="info-item">
                   <h4>Phone</h4>
                   <p>+91 6361176856</p>
                 </div>
-              </div>
-
-              <div className="contact-item">
-                <div className="contact-icon">
-                  <FaEnvelope />
-                </div>
-                <div className="contact-details">
+                <div className="info-item">
                   <h4>Email</h4>
-                  <p>info@learnnbyte.com</p>
+                  <p>rps.trainings05@gmail.com</p>
                 </div>
-              </div>
-
-              <div className="contact-item">
-                <div className="contact-icon">
-                  <FaMapMarkerAlt />
-                </div>
-                <div className="contact-details">
+                <div className="info-item">
                   <h4>Address</h4>
-                  <p>
-                    Learn N Byte<br />
-                    Bangalore, Karnataka 560001<br />
-                    India
-                  </p>
+                  <p>Learn N Byte<br />Bangalore, Karnataka<br />India - 560001</p>
                 </div>
-              </div>
-
-              <div className="contact-item">
-                <div className="contact-icon">
-                  <FaClock />
-                </div>
-                <div className="contact-details">
+                <div className="info-item">
                   <h4>Working Hours</h4>
-                  <p>
-                    Sunday: 9:00 AM - 6:00 PM
-                  </p>
+                  <p>Sunday: 9:00 AM - 6:00 PM IST</p>
                 </div>
               </div>
             </div>
 
+            {/* Send us a Message */}
             <div className="contact-form">
               <h3 className="contact-subtitle">Send us a Message</h3>
               <form className="form">
@@ -191,6 +164,7 @@ function About() {
                     placeholder="Your Name *" 
                     title="Please fill all *marked fields" 
                     required 
+                    className="form-input"
                   />
                 </div>
                 <div className="form-group">
@@ -201,12 +175,13 @@ function About() {
                     placeholder="Your Email *" 
                     title="Please fill all *marked fields" 
                     required 
+                    className="form-input"
                   />
                 </div>
                 <div className="form-group">
                   <div className="phone-input-group">
                     <select 
-                      className="country-code-select" 
+                      className="country-code-select form-input" 
                       name="countryCode"
                       onChange={handleInputChange}
                       title="Please fill all *marked fields" 
@@ -228,7 +203,7 @@ function About() {
                       onChange={handleInputChange}
                       placeholder="Mobile Number *" 
                       title="Please fill all *marked fields" 
-                      className="mobile-number-input" 
+                      className="form-input mobile-number-input" 
                       maxLength="10" 
                       required 
                     />
@@ -242,6 +217,7 @@ function About() {
                     rows="5" 
                     title="Please fill all *marked fields" 
                     required
+                    className="form-input"
                   ></textarea>
                 </div>
                 <button 

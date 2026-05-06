@@ -4,6 +4,15 @@ import '../styles/global.css';
 
 const Courses = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [showEnrollment, setShowEnrollment] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
           
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -11,6 +20,48 @@ const Courses = () => {
     }, 100);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleEnrollNow = (course) => {
+    setSelectedCourse(course);
+    setShowEnrollment(true);
+    setFormData({
+      ...formData,
+      course: course.title
+    });
+  };
+
+  const handleFormChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+    
+    // Here you would normally send the data to your backend
+    console.log('Enrollment form submitted:', formData);
+    
+    // Reset form after 3 seconds
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+      });
+      setShowEnrollment(false);
+      setSelectedCourse(null);
+    }, 3000);
+  };
+
+  const closeEnrollment = () => {
+    setShowEnrollment(false);
+    setSelectedCourse(null);
+  };
 
   const courses = [
     {
@@ -299,12 +350,6 @@ const Courses = () => {
   const sortedCourses = [...courses];
 
   
-  const handleEnrollNow = (_course) => {
-    // Do nothing
-    return;
-  };
-
-  
   const featuredCourses = sortedCourses.filter(course => course.featured);
   const regularCourses = sortedCourses.filter(course => !course.featured);
 
@@ -478,6 +523,143 @@ const Courses = () => {
           )}
         </div>
       </section>
+
+      {/* Enrollment Modal */}
+      {showEnrollment && selectedCourse && (
+        <div className="enrollment-modal-overlay" onClick={closeEnrollment}>
+          <div className="enrollment-modal" onClick={(e) => e.stopPropagation()}>
+            {/* Course Details */}
+            <div className="enrollment-modal-header">
+              <div className="selected-course-info">
+                <div className="selected-course-image">
+                  <img 
+                    src={selectedCourse.image} 
+                    alt={selectedCourse.title}
+                  />
+                </div>
+                <div className="selected-course-details">
+                  <h3>{selectedCourse.title}</h3>
+                  <p>{selectedCourse.description}</p>
+                  <div className="selected-course-meta">
+                    <span className="duration-badge">{selectedCourse.duration}</span>
+                    <span className="level-badge">{selectedCourse.level}</span>
+                    <span className="price-badge">₹{selectedCourse.price.toLocaleString('en-IN')}</span>
+                  </div>
+                </div>
+              </div>
+              <button className="close-modal-btn" onClick={closeEnrollment}>
+                ×
+              </button>
+            </div>
+
+            {/* Enrollment Form */}
+            <div className="enrollment-modal-content">
+              {isSubmitted ? (
+                <div className="success-message">
+                  <div className="success-icon">✓</div>
+                  <h3>Enrollment Request Submitted!</h3>
+                  <p>
+                    Thank you for your interest in <strong>{selectedCourse.title}</strong>. 
+                    Our team will contact you within 24 hours to complete your enrollment.
+                  </p>
+                </div>
+              ) : (
+                <form className="enrollment-form" onSubmit={handleFormSubmit}>
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="name">Full Name *</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleFormChange}
+                        required
+                        placeholder="Enter your full name"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="email">Email Address *</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleFormChange}
+                        required
+                        placeholder="your.email@example.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="phone">Phone Number</label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleFormChange}
+                        placeholder="+91 98765 43210"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="course">Selected Course</label>
+                      <input
+                        type="text"
+                        id="course"
+                        name="course"
+                        value={formData.course || selectedCourse.title}
+                        readOnly
+                        className="readonly-input"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="message">Additional Message</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleFormChange}
+                      rows="4"
+                      placeholder="Tell us about your learning goals and any questions you have..."
+                    ></textarea>
+                  </div>
+
+                  <div className="form-actions">
+                    <button type="submit" className="submit-btn">
+                      Submit Enrollment Request
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {/* Contact Information */}
+              <div className="enrollment-contact">
+                <h4>Need Help?</h4>
+                <div className="contact-details">
+                  <div className="contact-item">
+                    <strong>Email:</strong>
+                    <span>rps.trainings05@gmail.com</span>
+                  </div>
+                  <div className="contact-item">
+                    <strong>Phone:</strong>
+                    <span>+91 6361176856</span>
+                  </div>
+                  <div className="contact-item">
+                    <strong>Hours:</strong>
+                    <span>Sun: 9:00 AM - 6:00 PM IST</span>
+                  </div>
+                </div>
+              </div>
+
+                          </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

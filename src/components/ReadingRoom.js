@@ -4,6 +4,7 @@ import '../styles/global.css';
 function ReadingRoom() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [expandedArticle, setExpandedArticle] = useState(null);
 
   // Sample articles data
   const articles = [
@@ -11,6 +12,13 @@ function ReadingRoom() {
       id: 1,
       title: "The Future of AI in Education",
       excerpt: "Explore how artificial intelligence is transforming the educational landscape and creating new learning opportunities.",
+      content: `Artificial Intelligence is revolutionizing education in unprecedented ways. From personalized learning paths to intelligent tutoring systems, AI is creating opportunities that were once thought impossible.
+
+This comprehensive exploration delves into how machine learning algorithms are adapting to individual student needs, providing real-time feedback, and creating more engaging learning environments. We examine case studies from leading educational institutions that have successfully integrated AI into their curricula, resulting in improved student outcomes and more efficient teaching methodologies.
+
+The article also addresses concerns about AI in education, including data privacy, the importance of human oversight, and the need to maintain the human element in learning. As we look toward the future, we discuss emerging trends like AI-powered virtual reality classrooms, automated assessment systems, and the potential for AI to democratize education globally.
+
+The implications of these developments are profound, promising to reshape not just how we learn, but how we think about education itself in the 21st century.`,
       category: "Technology",
       author: "Dr. Priya Sharma",
       readTime: "5 min read",
@@ -22,6 +30,13 @@ function ReadingRoom() {
       id: 2,
       title: "Mastering Python for Data Science",
       excerpt: "A comprehensive guide to learning Python programming for data science and machine learning applications.",
+      content: `Python has become the de facto language for data science and machine learning, and for good reason. This comprehensive guide takes you from the basics of Python programming to advanced data science applications.
+
+We start with fundamental concepts like data types, control structures, and functions, then move on to essential libraries like NumPy for numerical computing, Pandas for data manipulation, and Matplotlib for visualization. The article covers practical examples of data cleaning, exploratory data analysis, and statistical modeling.
+
+We explore machine learning frameworks like Scikit-learn and TensorFlow, with hands-on examples of classification, regression, and clustering algorithms. Real-world case studies demonstrate how to apply these skills to solve actual business problems.
+
+The guide also includes best practices for code organization, version control, and collaboration in data science teams. Whether you're a beginner or looking to enhance your skills, this article provides the roadmap to becoming proficient in Python for data science.`,
       category: "Programming",
       author: "Rahul Kumar",
       readTime: "8 min read",
@@ -32,6 +47,13 @@ function ReadingRoom() {
       id: 3,
       title: "Effective Study Techniques for Programmers",
       excerpt: "Discover proven methods to enhance your learning efficiency and retain programming concepts better.",
+      content: `Learning to program effectively requires more than just writing code; it demands strategic study techniques that optimize comprehension and retention. This article explores evidence-based learning methods specifically tailored for programmers.
+
+We discuss the importance of deliberate practice, spaced repetition, and active recall in mastering programming concepts. The Pomodoro Technique is adapted for coding sessions, helping maintain focus and prevent burnout. We explore how to create effective learning projects that reinforce theoretical knowledge while building practical skills.
+
+The article covers techniques for reading and understanding documentation, debugging strategies that enhance learning, and methods for staying updated with rapidly changing technologies. We also address the psychological aspects of learning, including overcoming impostor syndrome, managing frustration when facing difficult problems, and maintaining motivation throughout the learning journey.
+
+Real-world examples from successful programmers illustrate how these techniques have been applied to achieve mastery in various programming domains.`,
       category: "Learning",
       author: "Prof. Anand Reddy",
       readTime: "6 min read",
@@ -42,6 +64,13 @@ function ReadingRoom() {
       id: 4,
       title: "Cloud Computing Trends in 2024",
       excerpt: "Stay updated with the latest cloud computing technologies and their impact on modern software development.",
+      content: `Cloud computing continues to evolve at a rapid pace, and 2024 brings exciting new developments that are reshaping how we build and deploy applications. This article examines the key trends driving cloud adoption and innovation.
+
+Serverless computing is maturing, with new frameworks and tools making it easier to build event-driven architectures. Multi-cloud and hybrid cloud strategies are becoming the norm, requiring new approaches to management and orchestration. We explore the rise of edge computing and how it's complementing traditional cloud services to enable real-time processing closer to users.
+
+The article covers advancements in container technologies, including Kubernetes improvements and the growing ecosystem of cloud-native tools. We also discuss the impact of AI on cloud services, from intelligent resource optimization to AI-powered development tools.
+
+Security considerations are addressed, including zero-trust architectures and compliance automation. Real-world case studies demonstrate how organizations are leveraging these trends to build more scalable, resilient, and cost-effective applications.`,
       category: "Technology",
       author: "Sneha Iyer",
       readTime: "7 min read",
@@ -52,6 +81,13 @@ function ReadingRoom() {
       id: 5,
       title: "Building Scalable Web Applications",
       excerpt: "Learn the best practices and architectural patterns for creating web applications that can handle growth.",
+      content: `Building web applications that can scale effectively requires careful planning and adherence to proven architectural patterns. This comprehensive guide covers everything you need to know about creating scalable applications.
+
+We start with the fundamentals of scalability, explaining the difference between vertical and horizontal scaling and when to use each approach. The article explores microservices architecture, including service decomposition strategies, inter-service communication patterns, and data consistency challenges.
+
+We discuss database scaling techniques, from read replicas to sharding strategies, and how to choose the right database for your needs. Caching strategies are covered in depth, including CDN implementation, application-level caching, and database query optimization.
+
+The guide addresses performance monitoring and optimization, teaching you how to identify bottlenecks and implement effective solutions. We also explore DevOps practices that support scalability, including CI/CD pipelines, infrastructure as code, and automated scaling policies. Real-world examples from companies that have successfully scaled their applications provide practical insights and lessons learned.`,
       category: "Programming",
       author: "Vikram Gowda",
       readTime: "10 min read",
@@ -62,6 +98,13 @@ function ReadingRoom() {
       id: 6,
       title: "The Psychology of Learning",
       excerpt: "Understanding how our brain processes information and how to leverage it for better educational outcomes.",
+      content: `The human brain's capacity for learning is extraordinary, yet understanding how we learn can dramatically improve educational outcomes. This article delves into the cognitive science behind learning, exploring how our brains process, store, and retrieve information.
+
+We examine the role of attention, memory, and motivation in the learning process, backed by the latest neuroscience research. The article covers different learning styles and how to adapt teaching methods to accommodate diverse learners. We discuss the importance of metacognition – thinking about thinking – and how it can enhance learning effectiveness.
+
+The concept of neuroplasticity is explored, showing how the brain can reorganize itself and form new neural connections throughout life. We address common learning myths and misconceptions, replacing them with evidence-based strategies.
+
+Practical techniques like interleaving, elaboration, and dual coding are explained with examples of how to apply them in various learning contexts. The article also considers the emotional aspects of learning, including how stress, anxiety, and confidence impact our ability to acquire and retain knowledge.`,
       category: "Learning",
       author: "Dr. Nandini Murthy",
       readTime: "9 min read",
@@ -143,7 +186,7 @@ function ReadingRoom() {
                 <div className="article-author">
                   <span className="author-name">By {featuredArticle.author}</span>
                 </div>
-                <button className="read-more-btn">Read Full Article</button>
+                <button className="read-more-btn" onClick={() => setExpandedArticle(featuredArticle.id)}>Read Full Article</button>
               </div>
             </div>
           </div>
@@ -171,7 +214,7 @@ function ReadingRoom() {
                   <p className="article-excerpt">{article.excerpt}</p>
                   <div className="article-footer">
                     <span className="author-name">By {article.author}</span>
-                    <button className="read-btn">Read More</button>
+                    <button className="read-btn" onClick={() => setExpandedArticle(article.id)}>Read More</button>
                   </div>
                 </div>
               </article>
@@ -179,6 +222,43 @@ function ReadingRoom() {
           </div>
         </div>
       </section>
+
+      {/* Full Article Modal */}
+      {expandedArticle && (
+        <div className="article-modal-overlay" onClick={() => setExpandedArticle(null)}>
+          <div className="article-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={() => setExpandedArticle(null)}>×</button>
+            {(() => {
+              const article = articles.find(a => a.id === expandedArticle);
+              if (!article) return null;
+              return (
+                <>
+                  <div className="modal-header">
+                    <img src={article.image} alt={article.title} className="modal-image" />
+                    <div className="modal-meta">
+                      <span className="modal-category">{article.category}</span>
+                      <span className="modal-date">{article.date}</span>
+                      <span className="modal-read-time">{article.readTime}</span>
+                    </div>
+                  </div>
+                  <div className="modal-content">
+                    <h1 className="modal-title">{article.title}</h1>
+                    <div className="modal-author">By {article.author}</div>
+                    <div className="modal-body">
+                      <p className="modal-excerpt">{article.excerpt}</p>
+                      <div className="modal-full-content">
+                        {article.content.split('\n\n').map((paragraph, index) => (
+                          <p key={index} className="article-paragraph">{paragraph}</p>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -16,20 +16,20 @@ const Support = () => {
           <div className="support-options">
             <div className="support-option">
               <h3 className="support-option-title">Email Support</h3>
-              <p className="support-option-text">support@learngrow.com</p>
+              <p className="support-option-text">rps.trainings05@gmail.com</p>
               <p className="support-option-subtext">Response time: 24-48 hours</p>
             </div>
             
             <div className="support-option">
               <h3 className="support-option-title">Live Chat</h3>
-              <p className="support-option-text">Available Monday - Friday, 9 AM - 6 PM EST</p>
+              <p className="support-option-text">Available Sunday: 9:00 AM - 6:00 PM IST</p>
               <button className="support-chat-btn">Start Chat</button>
             </div>
             
             <div className="support-option">
               <h3 className="support-option-title">Phone Support</h3>
-              <p className="support-option-text">1-800-LEARNGROW</p>
-              <p className="support-option-subtext">Available Monday - Friday, 9 AM - 6 PM EST</p>
+              <p className="support-option-text">1-800-6361176856</p>
+              <p className="support-option-subtext">Available Sunday: 9:00 AM - 6:00 PM IST</p>
             </div>
           </div>
         </div>
