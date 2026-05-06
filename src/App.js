@@ -10,6 +10,8 @@ import Home from './components/Home';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
 import About from './components/About';
+import Workshops from './components/Workshops';
+import ReadingRoom from './components/ReadingRoom';
 import Dashboard from './components/Dashboard';
 import Certificates from './components/Certificates';
 import LiveProjects from './components/LiveProjects';
@@ -30,6 +32,8 @@ function App() {
             <Route path="/courses" element={<Courses />} />
             <Route path="/course/:id" element={<CourseDetail />} />
             <Route path="/about" element={<About />} />
+            <Route path="/workshops" element={<Workshops />} />
+            <Route path="/reading-room" element={<ReadingRoom />} />
             <Route path="/course-contact" element={<CourseContact />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/certificates" element={<Certificates />} />

@@ -47,6 +47,18 @@ const Navbar = () => {
       description: 'Explore courses'
     },
     { 
+      name: 'Workshops', 
+      path: '/workshops', 
+      icon: FaBook,
+      description: 'Guest Lectures, Seminars & Workshops'
+    },
+    { 
+      name: 'Reading Room', 
+      path: '/reading-room', 
+      icon: FaBook,
+      description: 'Articles & Resources'
+    },
+    { 
       name: 'About Us', 
       path: '/about', 
       icon: FaInfoCircle,

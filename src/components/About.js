@@ -1,39 +1,15 @@
 import React, { useState } from 'react';
 import { FaGraduationCap, FaMobileAlt, FaLaptopCode, FaChalkboardTeacher, FaUsers, FaLightbulb, FaBullseye, FaEye, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from 'react-icons/fa';
 import aboutLogo from '../assets/images/about-logo.png';
-import guestLecture from '../assets/images/guest-lecture.jpeg';
-import seminar from '../assets/images/Seminar.jpeg';
-import collegeWorkshop from '../assets/images/college-workshop.jpeg';
-import mockInterview from '../assets/images/mock-interview.jpeg';
-import aiMLWorkshop from '../assets/images/AI ML Workshop.jpeg';
-import classroomTraining from '../assets/images/ClassroomTraining.jpeg';
 import '../styles/global.css';
 
 function About() {
   const [isFormValid, setIsFormValid] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const galleryImages = [
-    { src: guestLecture, alt: "Guest Lectures", title: "Guest Lectures" },
-    { src: seminar, alt: "Seminars", title: "Seminars" },
-    { src: collegeWorkshop, alt: "College Workshops", title: "College Workshops" },
-    { src: mockInterview, alt: "Mock Interviews", title: "Mock Interviews" },
-    { src: aiMLWorkshop, alt: "AI ML Workshop", title: "AI ML Workshop" },
-    { src: classroomTraining, alt: "Classroom Training", title: "Classroom Training" }
-  ];
 
   const handleInputChange = (e) => {
     const form = e.target.form;
     const isValid = form.checkValidity();
     setIsFormValid(isValid);
-  };
-
-  const handlePrevImage = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
-  };
-
-  const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -148,48 +124,7 @@ function About() {
         </div>
       </section>
 
-      {/* Events Section */}
-      <section className="about-section gallery-section">
-        <div className="container">
-          <h2 className="section-title">Our Events Gallery</h2>
-          <div className="carousel-container">
-            <button className="carousel-btn carousel-btn-prev" onClick={handlePrevImage}>
-              ‹
-            </button>
-            <div className="carousel-viewport">
-              <div 
-                className="carousel-track" 
-                style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
-              >
-                {galleryImages.map((image, index) => (
-                  <div 
-                    key={index} 
-                    className={`carousel-item ${index === currentImageIndex ? 'active' : ''}`}
-                  >
-                    <img src={image.src} alt={image.alt} />
-                    <div className="gallery-overlay">
-                      <span>{image.title}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <button className="carousel-btn carousel-btn-next" onClick={handleNextImage}>
-              ›
-            </button>
-          </div>
-          <div className="carousel-dots">
-            {galleryImages.map((_, index) => (
-              <button
-                key={index}
-                className={`carousel-dot ${index === currentImageIndex ? 'active' : ''}`}
-                onClick={() => setCurrentImageIndex(index)}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
+      
       {/* Contact Section */}
       <section className="about-section contact-section">
         <div className="container">
