@@ -1,0 +1,59 @@
+# Cloudflare Pages configuration for React SPA
+
+name = "learnngrow-frontend"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "npm run build"
+cwd = "."
+watch_dir = "build"
+
+[[redirects]]
+from = "/courses/*"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/about"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/course/*"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/dashboard"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/register"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/login"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/support"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/projects"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/certificates"
+to = "/index.html"
+status = 200
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
