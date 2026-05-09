@@ -186,7 +186,7 @@ const Courses = () => {
     },
     {
       id: 7,
-      title: "Fast API (Coming Soon)",
+      title: "Fast API",
       description: "Build high-performance APIs with Python's FastAPI framework. Modern web development made simple.",
       instructor: "API Expert",
       instructorImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face",
@@ -206,7 +206,7 @@ const Courses = () => {
     },
     {
       id: 8,
-      title: "Cloud Computing (AWS) (Coming Soon)",
+      title: "Cloud Computing (AWS)",
       description: "Master Amazon Web Services and cloud computing fundamentals for modern infrastructure deployment.",
       instructor: "Cloud Expert",
       instructorImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face",
@@ -226,7 +226,7 @@ const Courses = () => {
     },
     {
       id: 9,
-      title: "System Designing (Coming Soon)",
+      title: "System Designing",
       description: "Learn system design principles and architecture patterns for building scalable, robust applications.",
       instructor: "System Design Expert",
       instructorImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face",
@@ -246,7 +246,7 @@ const Courses = () => {
     },
     {
       id: 10,
-      title: "Generative AI (Coming Soon)",
+      title: "Generative AI",
       description: "Explore the world of generative AI, including GPT, DALL-E, and cutting-edge AI technologies.",
       instructor: "AI Expert",
       instructorImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face",
@@ -361,10 +361,6 @@ const Courses = () => {
           <div className="courses-container">
             <div className="section-header">
               <h2 className="section-title">Featured Courses</h2>
-              <div className="featured-badge">
-                <FaStar />
-                <span>Top Rated</span>
-              </div>
             </div>
             
             <div className="courses-grid-layout">

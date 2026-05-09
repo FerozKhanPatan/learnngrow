@@ -8,25 +8,25 @@ const Home = () => {
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      role: "Frontend Developer",
+      name: "Ramesh Kumar",
+      role: "Software Developer",
       content: "Learn N Byte completely transformed my career. The courses are comprehensive and projects really helped me build my portfolio.",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face"
     },
     {
-      name: "Michael Chen",
+      name: "Priya Sharma",
       role: "Full Stack Engineer",
       content: "The best investment I made in my professional development. The instructors are top-notch and community is amazing.",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face"
     },
     {
-      name: "Emily Rodriguez",
-      role: "UX Designer",
+      name: "Arun Patil",
+      role: "UI/UX Designer",
       content: "I love the hands-on approach to learning. The projects are challenging but rewarding, and I've gained so much confidence.",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
     }
   ];
 
