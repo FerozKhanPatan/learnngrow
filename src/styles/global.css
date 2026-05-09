@@ -489,7 +489,9 @@ button {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+  text-align: center;
 }
 
 /* Mobile Menu Button */
@@ -2782,12 +2784,16 @@ button {
   font-weight: 800;
   margin-bottom: 0.5rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .auth-subtitle {
   font-size: 1rem;
   opacity: 0.9;
   font-weight: 400;
+  text-align: center;
+  margin: 0 auto 2rem auto;
+  max-width: 400px;
 }
 
 .auth-card {
