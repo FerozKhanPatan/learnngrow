@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaBars, FaTimes, FaHome, FaBook, FaSignInAlt, FaUserPlus, FaChevronDown, FaInfoCircle } from 'react-icons/fa';
+import { FaHome, FaBook, FaSignInAlt, FaUserPlus, FaChevronDown, FaInfoCircle } from 'react-icons/fa';
 import logoImage from '../assets/images/LearnNByteLogo.png';
+import MobileNavigation from './MobileNavigation';
 import '../styles/global.css';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const [dropdownTimeout, setDropdownTimeout] = useState(null);
@@ -166,80 +166,10 @@ const Navbar = () => {
               </Link>
             </div>
 
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="mobile-menu-btn"
-            >
-              {isOpen ? (
-                <FaTimes className={`mobile-menu-icon open`} />
-              ) : (
-                <FaBars className="mobile-menu-icon" />
-              )}
-            </button>
-          </div>
-        </div>
+            {/* Mobile Navigation */}
+            <MobileNavigation />
 
-        <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
-          <div className="mobile-menu-content">
-            {/* Header */}
-            <div className="mobile-menu-header">
-              <div className="mobile-menu-header-content">
-                <div className="mobile-menu-welcome">
-                  <div className="mobile-menu-indicator"></div>
-                  <span className="mobile-menu-welcome-text">Welcome to Learn N Byte</span>
-                </div>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="mobile-menu-close"
-                >
-                  <FaTimes className="mobile-menu-close-icon" />
-                </button>
-              </div>
             </div>
-            
-            {/* Navigation Items */}
-            <div className="mobile-menu-nav">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`mobile-nav-item ${location.pathname === item.path ? 'active' : ''}`}
-                  >
-                    <div className="mobile-nav-icon-container">
-                      <Icon className="mobile-nav-icon" />
-                      {location.pathname === item.path && (
-                        <div className="mobile-nav-indicator"></div>
-                      )}
-                    </div>
-                    <span className="mobile-nav-text">{item.name}</span>
-                  </Link>
-                );
-              })}
-            </div>
-            
-            {/* Action Buttons */}
-            <div className="mobile-menu-actions">
-              <Link
-                to="/login"
-                onClick={() => setIsOpen(false)}
-                className="mobile-action-btn mobile-signin"
-              >
-                <FaSignInAlt className="text-sm" />
-                <span className="font-semibold text-sm">Sign In</span>
-              </Link>
-              <Link
-                to="/register"
-                onClick={() => setIsOpen(false)}
-                className="mobile-action-btn mobile-register"
-              >
-                <FaUserPlus className="text-sm" />
-                <span className="font-bold text-sm">Get Started</span>
-              </Link>
-            </div>
-          </div>
         </div>
       </nav>
       

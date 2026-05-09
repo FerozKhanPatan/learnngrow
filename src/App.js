@@ -6,6 +6,7 @@ import './styles/global.css';
 
 // Import components
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './components/Home';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
@@ -25,23 +26,26 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="min-h-screen">
+        <div className="app-wrapper">
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/course/:id" element={<CourseDetail />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/workshops" element={<Workshops />} />
-            <Route path="/reading-room" element={<ReadingRoom />} />
-            <Route path="/course-contact" element={<CourseContact />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/certificates" element={<Certificates />} />
-            <Route path="/projects" element={<LiveProjects />} />
-            <Route path="/support" element={<Support />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/course/:id" element={<CourseDetail />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/workshops" element={<Workshops />} />
+              <Route path="/reading-room" element={<ReadingRoom />} />
+              <Route path="/course-contact" element={<CourseContact />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/certificates" element={<Certificates />} />
+              <Route path="/projects" element={<LiveProjects />} />
+              <Route path="/support" element={<Support />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+          </main>
+          <Footer />
           <ToastContainer 
             position="bottom-right" 
             theme="colored"

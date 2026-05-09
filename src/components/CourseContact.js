@@ -74,30 +74,7 @@ ${formData.message}`;
     }, 3000);
   };
 
-  const handleDirectEmail = () => {
-    const emailSubject = `Course Enquiry: ${courseInfo?.title || 'General Enquiry'}`;
-    const emailBody = `Hi Learn N Byte Team,
-
-I'm interested in learning more about your courses.
-
-${courseInfo ? `Specifically interested in: ${courseInfo.title}
-Level: ${courseInfo.level}
-Duration: ${courseInfo.duration}` : ''}
-
-Please provide me with more information about:
-1. Course syllabus and curriculum
-2. Batch timings and schedule
-3. Fee structure and payment options
-4. Enrollment process
-5. Any prerequisites required
-
-Looking forward to your response.
-
-Thank you!`;
-
-    window.location.href = `mailto:learnnbyte@example.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-  };
-
+  
   return (
     <div className="course-contact-page">
       {/* Header */}
@@ -211,38 +188,28 @@ Thank you!`;
             <div className="quick-contact-section">
               <h2 className="contact-section-title">Quick Contact Options</h2>
               
-              <div className="contact-cards">
-                <div className="contact-card" onClick={handleDirectEmail}>
-                  <div className="contact-card-icon">
-                    <FaEnvelope />
-                  </div>
-                  <h3>Email Us Directly</h3>
-                  <p>Send us an email directly with your course enquiry</p>
-                  <button className="contact-card-button">
-                    <FaEnvelope />
-                    <span>Compose Email</span>
-                  </button>
-                </div>
-
-                <div className="contact-card">
-                  <div className="contact-card-icon">
-                    <FaPhone />
-                  </div>
-                  <h3>Call Us</h3>
-                  <p>Speak with our course counselors directly</p>
-                  <div className="contact-info">
-                    <span>+91 98765 43210</span>
+              <div className="contact-info-simple">
+                <div className="contact-item-simple">
+                  <FaEnvelope className="contact-icon-simple" />
+                  <div className="contact-text-simple">
+                    <h3>Email</h3>
+                    <p>rps.trainings05@gmail.com</p>
                   </div>
                 </div>
 
-                <div className="contact-card">
-                  <div className="contact-card-icon">
-                    <FaMapMarkerAlt />
+                <div className="contact-item-simple">
+                  <FaPhone className="contact-icon-simple" />
+                  <div className="contact-text-simple">
+                    <h3>Phone</h3>
+                    <p>+91 6361176856</p>
                   </div>
-                  <h3>Visit Our Center</h3>
-                  <p>Meet us in person for course counseling</p>
-                  <div className="contact-info">
-                    <span>123, Education Street, Learning City - 560001</span>
+                </div>
+
+                <div className="contact-item-simple">
+                  <FaMapMarkerAlt className="contact-icon-simple" />
+                  <div className="contact-text-simple">
+                    <h3>Location</h3>
+                    <p>Online Learning Platform</p>
                   </div>
                 </div>
               </div>
