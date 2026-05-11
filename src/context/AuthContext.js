@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { authAPI } from '../services/api';
 
 const AuthContext = createContext();
 
@@ -17,51 +18,74 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     // Check for existing user session (e.g., from localStorage)
     const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    const storedToken = localStorage.getItem('token');
+    if (storedUser && storedToken) {
       setUser(JSON.parse(storedUser));
     }
     setLoading(false);
   }, []);
 
-  const login = async (email, _password) => {
+  const login = async (email, password) => {
     try {
-      // Simulate API call
-      const userData = {
-        id: 1,
-        name: 'John Doe',
-        email: email,
-        token: 'mock-jwt-token'
-      };
+      setLoading(true);
+      const response = await authAPI.login({ email, password });
       
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-      return { success: true };
+      if (response.data.success) {
+        const userData = {
+          id: response.data.user.id,
+          name: response.data.user.name,
+          email: response.data.user.email,
+          token: response.data.token,
+          role: response.data.user.role
+        };
+        
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('token', response.data.token);
+        return { success: true };
+      } else {
+        return { success: false, error: response.data.message };
+      }
     } catch (error) {
-      return { success: false, error: 'Login failed' };
+      return { success: false, error: 'Login failed. Please try again.' };
+    } finally {
+      setLoading(false);
     }
   };
 
-  const register = async (name, email, _password) => {
+  const register = async (name, email, password) => {
     try {
-      // Simulate API call
-      const userData = {
-        id: 1,
-        name: name,
-        email: email,
-        token: 'mock-jwt-token'
-      };
+      setLoading(true);
+      const response = await authAPI.register({ name, email, password });
       
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-      return { success: true };
+      if (response.data.success) {
+        const userData = {
+          id: response.data.user.id,
+          name: response.data.user.name,
+          email: response.data.user.email,
+          token: response.data.token,
+          role: response.data.user.role
+        };
+        
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('token', response.data.token);
+        return { success: true };
+      } else {
+        return { success: false, error: response.data.message };
+      }
     } catch (error) {
-      return { success: false, error: 'Registration failed' };
+      return { success: false, error: 'Registration failed. Please try again.' };
+    } finally {
+      setLoading(false);
     }
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    authAPI.logout();
   };
 
   const value = {
