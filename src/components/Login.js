@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGraduationCap, FaGoogle, FaGithub, FaFacebook, FaCheck, FaTimes } from 'react-icons/fa';
+import axios from 'axios';
 import '../styles/global.css';
 
 const Login = () => {
@@ -64,17 +65,21 @@ const Login = () => {
     
     setLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Login attempt:', formData);
-      // Store user in localStorage
-      const userData = {
-        id: 1,
-        name: 'John Doe',
+    try {
+      const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
         email: formData.email,
-        token: 'mock-jwt-token'
-      };
-      localStorage.setItem('user', JSON.stringify(userData));
+        password: formData.password
+      });
+      
+      console.log('Login successful:', response.data);
+      
+      // Store user data and token
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+      }
+      
       setLoading(false);
       setLoginSuccess(true);
       
@@ -82,7 +87,13 @@ const Login = () => {
       setTimeout(() => {
         navigate('/dashboard');
       }, 1500);
-    }, 1500);
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoading(false);
+      setErrors({ 
+        submit: error.response?.data || 'Login failed. Please check your credentials.' 
+      });
+    }
   };
 
   const handleSocialLogin = (provider) => {

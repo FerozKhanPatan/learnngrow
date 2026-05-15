@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGraduationCap, FaGoogle, FaGithub, FaFacebook, FaCheck } from 'react-icons/fa';
+import axios from 'axios';
 import '../styles/global.css';
 
 const Register = () => {
@@ -112,20 +113,31 @@ const Register = () => {
     
     setLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Registration attempt:', formData);
-      // Store user in localStorage
-      const userData = {
-        id: 1,
+    try {
+      const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, {
         name: formData.name,
         email: formData.email,
-        token: 'mock-jwt-token'
-      };
-      localStorage.setItem('user', JSON.stringify(userData));
+        password: formData.password
+      });
+      
+      console.log('Registration successful:', response.data);
+      
+      // Store user data and token
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+      }
+      
       setLoading(false);
       navigate('/dashboard');
-    }, 1500);
+    } catch (error) {
+      console.error('Registration error:', error);
+      setLoading(false);
+      setErrors({ 
+        submit: error.response?.data || 'Registration failed. Please try again.' 
+      });
+    }
   };
 
   const handleSocialSignup = (provider) => {
