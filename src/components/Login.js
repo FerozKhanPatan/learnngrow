@@ -89,6 +89,8 @@ const Login = () => {
       }, 1500);
     } catch (error) {
       console.error('Login error:', error);
+      console.error('Error response:', error.response?.data);
+      console.error('Error status:', error.response?.status);
       setLoading(false);
       setErrors({ 
         submit: error.response?.data || 'Login failed. Please check your credentials.' 
