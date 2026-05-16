@@ -20,6 +20,8 @@ import Support from './components/Support';
 import Login from './components/Login';
 import Register from './components/Register';
 import CourseContact from './components/CourseContact';
+import AccountSettings from './components/AccountSettings';
+import Learning from './components/Learning';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -38,11 +40,13 @@ function App() {
               <Route path="/reading-room" element={<ReadingRoom />} />
               <Route path="/course-contact" element={<CourseContact />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/learning" element={<Learning />} />
               <Route path="/certificates" element={<Certificates />} />
               <Route path="/projects" element={<LiveProjects />} />
               <Route path="/support" element={<Support />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/account-settings" element={<AccountSettings />} />
             </Routes>
           </main>
           <Footer />

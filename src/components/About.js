@@ -123,7 +123,6 @@ function About() {
           </div>
         </div>
       </section>
-
       {/* Contact Section */}
       <section className="about-section contact-section">
         <div className="container">
