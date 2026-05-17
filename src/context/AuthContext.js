@@ -13,7 +13,8 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [initializing, setInitializing] = useState(true);
+  const [authLoading, setAuthLoading] = useState(false);
 
   useEffect(() => {
     // Check for existing user session (e.g., from localStorage)
@@ -22,12 +23,12 @@ export const AuthProvider = ({ children }) => {
     if (storedUser && storedToken) {
       setUser(JSON.parse(storedUser));
     }
-    setLoading(false);
+    setInitializing(false);
   }, []);
 
   const login = async (email, password) => {
     try {
-      setLoading(true);
+      setAuthLoading(true);
       const response = await authAPI.login({ email, password });
       
       if (response.data.success) {
@@ -49,13 +50,13 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       return { success: false, error: 'Login failed. Please try again.' };
     } finally {
-      setLoading(false);
+      setAuthLoading(false);
     }
   };
 
   const register = async (name, email, password) => {
     try {
-      setLoading(true);
+      setAuthLoading(true);
       const response = await authAPI.register({ name, email, password });
       
       if (response.data.success) {
@@ -77,7 +78,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       return { success: false, error: 'Registration failed. Please try again.' };
     } finally {
-      setLoading(false);
+      setAuthLoading(false);
     }
   };
 
@@ -93,12 +94,12 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
-    loading
+    loading: authLoading
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {!initializing && children}
     </AuthContext.Provider>
   );
 };
