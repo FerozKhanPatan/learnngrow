@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGraduationCap, FaGoogle, FaGithub, FaFacebook, FaCheck, FaTimes } from 'react-icons/fa';
-import axios from 'axios';
+import { FaEye, FaEyeSlash, FaGraduationCap, FaCheck, FaTimes, FaGoogle, FaGithub, FaFacebook, FaEnvelope, FaLock } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext';
 import '../styles/global.css';
 
 const Login = () => {
@@ -12,10 +12,11 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
-  const [isVisible, setIsVisible] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -66,34 +67,28 @@ const Login = () => {
     setLoading(true);
     
     try {
-      const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
-      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
-        email: formData.email,
-        password: formData.password
-      });
+      // Use AuthContext login function to update state
+      const result = await login(formData.email, formData.password);
       
-      console.log('Login successful:', response.data);
-      
-      // Store user data and token
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
+      if (result.success) {
+        setLoading(false);
+        setLoginSuccess(true);
+        
+        // Navigate after success animation
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 1500);
+      } else {
+        setLoading(false);
+        setErrors({ 
+          submit: result.error || 'Login failed. Please check your credentials.' 
+        });
       }
-      
-      setLoading(false);
-      setLoginSuccess(true);
-      
-      // Navigate after success animation
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 1500);
     } catch (error) {
       console.error('Login error:', error);
-      console.error('Error response:', error.response?.data);
-      console.error('Error status:', error.response?.status);
       setLoading(false);
       setErrors({ 
-        submit: error.response?.data || 'Login failed. Please check your credentials.' 
+        submit: error.message || 'Login failed. Please check your credentials.' 
       });
     }
   };

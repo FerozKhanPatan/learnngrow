@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGraduationCap, FaGoogle, FaGithub, FaFacebook, FaCheck } from 'react-icons/fa';
-import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 import '../styles/global.css';
 
 const Register = () => {
@@ -17,6 +17,7 @@ const Register = () => {
   const [errors, setErrors] = useState({});
   const [passwordStrength, setPasswordStrength] = useState(0);
   const navigate = useNavigate();
+  const { register } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -114,28 +115,23 @@ const Register = () => {
     setLoading(true);
     
     try {
-      const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
-      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password
-      });
+      // Use AuthContext register function to update state
+      const result = await register(formData.name, formData.email, formData.password);
       
-      console.log('Registration successful:', response.data);
-      
-      // Store user data and token
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
+      if (result.success) {
+        setLoading(false);
+        navigate('/dashboard');
+      } else {
+        setLoading(false);
+        setErrors({ 
+          submit: result.error || 'Registration failed. Please try again.' 
+        });
       }
-      
-      setLoading(false);
-      navigate('/dashboard');
     } catch (error) {
       console.error('Registration error:', error);
       setLoading(false);
       setErrors({ 
-        submit: error.response?.data || 'Registration failed. Please try again.' 
+        submit: error.message || 'Registration failed. Please try again.' 
       });
     }
   };
