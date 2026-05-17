@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaEye, FaEyeSlash, FaGraduationCap, FaCheck, FaTimes, FaGoogle, FaGithub, FaFacebook } from 'react-icons/fa';
-import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
+import { FaEye, FaEyeSlash, FaGraduationCap, FaCheck, FaTimes, FaGoogle, FaGithub, FaFacebook, FaEnvelope, FaLock } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import '../styles/global.css';
 

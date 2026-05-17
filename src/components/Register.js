@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGraduationCap, FaGoogle, FaGithub, FaFacebook, FaCheck } from 'react-icons/fa';
-import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import '../styles/global.css';
 
