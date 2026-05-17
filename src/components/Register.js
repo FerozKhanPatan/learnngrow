@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGraduationCap, FaGoogle, FaGithub, FaFacebook, FaCheck } from 'react-icons/fa';
-import axios from 'axios';
 import '../styles/global.css';
+import { useAuth } from '../context/AuthContext';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +17,7 @@ const Register = () => {
   const [errors, setErrors] = useState({});
   const [passwordStrength, setPasswordStrength] = useState(0);
   const navigate = useNavigate();
+  const { register } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -113,30 +114,12 @@ const Register = () => {
     
     setLoading(true);
     
-    try {
-      const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
-      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password
-      });
-      
-      console.log('Registration successful:', response.data);
-      
-      // Store user data and token
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-      }
-      
-      setLoading(false);
+    const result = await register(formData.name, formData.email, formData.password);
+    
+    if (result.success) {
       navigate('/dashboard');
-    } catch (error) {
-      console.error('Registration error:', error);
-      setLoading(false);
-      setErrors({ 
-        submit: error.response?.data || 'Registration failed. Please try again.' 
-      });
+    } else {
+      setErrors({ submit: result.error });
     }
   };
 

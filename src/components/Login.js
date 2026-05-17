@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGraduationCap, FaGoogle, FaGithub, FaFacebook, FaCheck, FaTimes } from 'react-icons/fa';
-import axios from 'axios';
 import '../styles/global.css';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +16,7 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -65,51 +66,34 @@ const Login = () => {
     
     setLoading(true);
     
-    try {
-      const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
-      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
-        email: formData.email,
-        password: formData.password
-      });
-      
-      console.log('Login successful:', response.data);
-      
-      // Store user data and token
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-      }
-      
-      setLoading(false);
+    const result = await login(formData.email, formData.password);
+    
+    if (result.success) {
       setLoginSuccess(true);
-      
-      // Navigate after success animation
       setTimeout(() => {
         navigate('/dashboard');
       }, 1500);
-    } catch (error) {
-      console.error('Login error:', error);
-      console.error('Error response:', error.response?.data);
-      console.error('Error status:', error.response?.status);
-      setLoading(false);
-      setErrors({ 
-        submit: error.response?.data || 'Login failed. Please check your credentials.' 
-      });
+    } else {
+      setErrors({ submit: result.error });
     }
   };
 
   const handleSocialLogin = (provider) => {
     console.log(`Login with ${provider}`);
-    // Handle social login logic here
+    // Handle social login logic here - would need to integrate with AuthContext
     setLoading(true);
     setTimeout(() => {
       const userData = {
         id: 1,
         name: 'John Doe',
         email: `user@${provider.toLowerCase()}.com`,
-        token: `${provider.toLowerCase()}-mock-jwt-token`
+        token: `${provider.toLowerCase()}-mock-jwt-token`,
+        role: 'user'
       };
       localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('token', userData.token);
+      // Manually set user in AuthContext for social login
+      // Note: This is a temporary solution; proper social login should use AuthContext
       setLoading(false);
       navigate('/dashboard');
     }, 1000);
