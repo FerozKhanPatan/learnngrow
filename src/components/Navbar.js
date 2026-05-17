@@ -159,89 +159,98 @@ const Navbar = () => {
             </div>
 
             <div className="nav-actions">
-              {user ? (
-                <div className="user-menu-container">
-                  <button 
-                    className="user-profile-btn"
-                    onClick={toggleUserMenu}
-                  >
-                    <div className="user-avatar">
-                      <FaUser />
-                    </div>
-                    <span className="user-name">{user.name}</span>
-                    <FaChevronDown className={`user-chevron ${userMenuOpen ? 'open' : ''}`} />
-                  </button>
-                  
-                  {userMenuOpen && (
-                    <div className="user-dropdown">
-                      <div className="user-dropdown-header">
-                        <div className="user-dropdown-avatar">
+              <div className="user-menu-container">
+                <button 
+                  className="user-profile-btn"
+                  onClick={toggleUserMenu}
+                >
+                  <div className="user-avatar">
+                    <FaUser />
+                  </div>
+                  <span className="user-name">{user ? user.name : 'Guest'}</span>
+                  <FaChevronDown className={`user-chevron ${userMenuOpen ? 'open' : ''}`} />
+                </button>
+                
+                {userMenuOpen && (
+                  <div className="user-dropdown">
+                    {user ? (
+                      <>
+                        <div className="user-dropdown-header">
+                          <div className="user-dropdown-avatar">
+                            <FaUser />
+                          </div>
+                          <div className="user-dropdown-info">
+                            <p className="user-dropdown-name">{user.name}</p>
+                            <p className="user-dropdown-email">{user.email}</p>
+                          </div>
+                        </div>
+                        <div className="user-dropdown-divider"></div>
+                        <Link 
+                          to="/dashboard" 
+                          className="user-dropdown-item"
+                          onClick={() => setUserMenuOpen(false)}
+                        >
+                          <FaBook />
+                          <span>My Learning</span>
+                        </Link>
+                        <Link 
+                          to="/dashboard" 
+                          className="user-dropdown-item"
+                          onClick={() => setUserMenuOpen(false)}
+                        >
+                          <FaBook />
+                          <span>My Enrolments</span>
+                        </Link>
+                        <Link 
+                          to="/account-settings" 
+                          className="user-dropdown-item"
+                          onClick={() => setUserMenuOpen(false)}
+                        >
                           <FaUser />
+                          <span>Account Settings</span>
+                        </Link>
+                        <div className="user-dropdown-divider"></div>
+                        <button 
+                          className="user-dropdown-item user-dropdown-logout"
+                          onClick={handleLogout}
+                        >
+                          <FaSignOutAlt />
+                          <span>Logout</span>
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <div className="user-dropdown-header">
+                          <div className="user-dropdown-avatar">
+                            <FaUser />
+                          </div>
+                          <div className="user-dropdown-info">
+                            <p className="user-dropdown-name">Guest</p>
+                            <p className="user-dropdown-email">Sign in to access your account</p>
+                          </div>
                         </div>
-                        <div className="user-dropdown-info">
-                          <p className="user-dropdown-name">{user.name}</p>
-                          <p className="user-dropdown-email">{user.email}</p>
-                        </div>
-                      </div>
-                      <div className="user-dropdown-divider"></div>
-                      <Link 
-                        to="/dashboard" 
-                        className="user-dropdown-item"
-                        onClick={() => setUserMenuOpen(false)}
-                      >
-                        <FaBook />
-                        <span>My Learning</span>
-                      </Link>
-                      <Link 
-                        to="/dashboard" 
-                        className="user-dropdown-item"
-                        onClick={() => setUserMenuOpen(false)}
-                      >
-                        <FaBook />
-                        <span>My Enrolments</span>
-                      </Link>
-                      <Link 
-                        to="/account-settings" 
-                        className="user-dropdown-item"
-                        onClick={() => setUserMenuOpen(false)}
-                      >
-                        <FaUser />
-                        <span>Account Settings</span>
-                      </Link>
-                      <div className="user-dropdown-divider"></div>
-                      <button 
-                        className="user-dropdown-item user-dropdown-logout"
-                        onClick={handleLogout}
-                      >
-                        <FaSignOutAlt />
-                        <span>Logout</span>
-                      </button>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <>
-                  <Link
-                    to="/login"
-                    className="btn-signin"
-                  >
-                    <div className="btn-signin-overlay"></div>
-                    <FaSignInAlt className="text-sm" />
-                    <span>Sign In</span>
-                  </Link>
-                  
-                  <Link
-                    to="/register"
-                    className="btn-register"
-                  >
-                    <div className="btn-register-overlay"></div>
-                    <div className="btn-register-content">
-                      <FaUserPlus className="text-sm" />
-                      <span>Get Started</span>
-                    </div>
-                  </Link>
-                </>
-              )}
+                        <div className="user-dropdown-divider"></div>
+                        <Link 
+                          to="/login" 
+                          className="user-dropdown-item"
+                          onClick={() => setUserMenuOpen(false)}
+                        >
+                          <FaSignInAlt />
+                          <span>Sign In</span>
+                        </Link>
+                        <Link 
+                          to="/register" 
+                          className="user-dropdown-item"
+                          onClick={() => setUserMenuOpen(false)}
+                        >
+                          <FaUserPlus />
+                          <span>Get Started</span>
+                        </Link>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Mobile Navigation */}
